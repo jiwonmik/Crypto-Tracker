@@ -5,6 +5,6 @@ declare module 'styled-components'{
         // explain your shape(or properties) of theme
         textColor: string;
         bgColor: string;
-        btnColor: string;
+        accentColor: string;
     }
 }
