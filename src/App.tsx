@@ -1,9 +1,8 @@
-import { GlobalStyleComponent, createGlobalStyle } from "styled-components";
+import {createGlobalStyle } from "styled-components";
 import Router from "./Router";
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,300;1,200&display=swap');
-  html, body, div, span, applet, object, iframe,
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Sofia+Sans:ital,wght@0,300;1,200;1,300&display=swap');  html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
   del, dfn, em, img, ins, kbd, q, s, samp,
@@ -50,12 +49,13 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    font-family: 'Sofia Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props)=>props.theme.textColor}
   }
   a {
     text-decoration: none;
+    color: inherit;
   }
 `;
 
