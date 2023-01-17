@@ -7,16 +7,17 @@ import Chart from "./Chart";
 import Price from "./Price";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import { Helmet } from "react-helmet";
+import Coins from "./Coins";
 
 const Container = styled.div`
-    padding: 0px 20px;
+    padding: 10px 20px;
     max-width: 480px;
     margin: 0 auto;
 `;
 const Header = styled.header`
     height: 15vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 `;
 const Title = styled.h1`
@@ -68,6 +69,25 @@ const Tab = styled.span<{ isActive: boolean }>`
     a {
         display: block;
     }
+`
+const BackBtn = styled.span`
+    width: 40px;
+    height: 40px;
+    display: flex;
+    background-color: ${(props) => props.theme.bgColor};
+    border: 1px solid ${(props) => props.theme.textColor};
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 13px 13px;
+    border-radius: 13px;
+    a {
+        display: block;
+    }
+`
+const BtnContainer = styled.div`
+    width: 30%;
 `
 
 interface RouteParams {
@@ -161,9 +181,15 @@ function Coin() {
             </title>
         </Helmet>
             <Header>
+                <BtnContainer>
+                <BackBtn>
+                    <Link to="/">Home</Link>    
+                </BackBtn>       
+                </BtnContainer>
                 <Title>
                     {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
                 </Title>
+                <BtnContainer></BtnContainer>
             </Header>
             {loading ? (
                 <Loader>Loading...</Loader>
