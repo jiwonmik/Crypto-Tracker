@@ -18,7 +18,9 @@ interface CharProps {
     coinId: string;
 }
 function Chart({coinId}:CharProps) {
-    const { isLoading, data } = useQuery<IHistoricalData[]>(["ohlcv", coinId], () => fetchCoinHistory(coinId));
+    const { isLoading, data } = useQuery<IHistoricalData[]>(
+        ["ohlcv", coinId], 
+        () => fetchCoinHistory(coinId));
     return (
         <div>
         {isLoading ? (
@@ -56,8 +58,21 @@ function Chart({coinId}:CharProps) {
                         show:false
                     },
                     xaxis:{
-                        labels:{
-                            show:false
+                        labels:{ show:false },
+                        categories: data?.map((price) => 
+                        new Date(price.time_close*1000).toUTCString()),
+                        type: "datetime"
+                    },
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            gradientToColors: ["#79fa9e"], stops: [0, 100]
+                        },
+                        colors: ['#008000'],
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: (value) => `$ ${value.toFixed(2)}`
                         }
                     }
             }}
