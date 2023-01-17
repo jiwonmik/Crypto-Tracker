@@ -28,54 +28,40 @@ function Chart({coinId}:CharProps) {
         ) : (
             // @ts-ignore 
             <ApexCharts 
-                type="line"
+                type="candlestick"
                 series={[
                     {
-                        name: "price",
-                        data: data?.map((price) => parseFloat(price.close))??[]
-                    },
+                        data: data?.map((price)=>[
+                            price.time_close*1000,
+                            Number(price.open),
+                            Number(price.high)??[],
+                            Number(price.low)??[],
+                            Number(price.close)??[]
+                        ])??[],
+                    }
                 ]}
                 options={{
-                    theme:{
-                        mode: "dark"
-                    },
-                    chart: {
-                        height: 300,
+                    chart:{
+                        height: 500,
                         width: 500,
-                        toolbar: {
-                            show: false
-                        },
-                        background: "transparent"
-                    },
-                    grid :{
-                        show: false
-                    },
-                    stroke:{
-                        curve: "smooth",
-                        width: 5
+                        toolbar :{
+                            show:false
+                        }
                     },
                     yaxis:{
-                        show:false
+                        show: false
                     },
                     xaxis:{
-                        labels:{ show:false },
-                        categories: data?.map((price) => 
+                        categories: data?.map((price)=>
                         new Date(price.time_close*1000).toUTCString()),
-                        type: "datetime"
-                    },
-                    fill: {
-                        type: "gradient",
-                        gradient: {
-                            gradientToColors: ["#79fa9e"], stops: [0, 100]
-                        },
-                        colors: ['#008000'],
-                    },
-                    tooltip: {
-                        y: {
-                            formatter: (value) => `$ ${value.toFixed(2)}`
+                        type:"datetime",
+                        labels:{
+                            style:{
+                                colors: "#fff"
+                            }
                         }
                     }
-            }}
+                }}
         />
     )}
     </div>
