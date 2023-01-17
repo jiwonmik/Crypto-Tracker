@@ -54,7 +54,7 @@ const Coin = styled.li`
 `;
 
 interface ICoin {
-    "id": string,
+    "id": string
     "name": string,
     "symbol": string
     "rank": number,
