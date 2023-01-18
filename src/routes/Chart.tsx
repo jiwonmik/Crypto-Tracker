@@ -2,6 +2,10 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { fetchCoinHistory } from "../api";
 import ApexCharts from "react-apexcharts";
+import styled from "styled-components";
+
+import { ToggleButtonGroup,ToggleButton } from "@mui/material";
+
 
 interface IHistoricalData {
     time_open: number;
@@ -17,6 +21,13 @@ interface IHistoricalData {
 interface CharProps {
     coinId: string;
 }
+
+const ChartContainer=styled.div`
+    padding: 0px 20px;
+    max-width: 480px;
+    margin: 0 auto;
+`;
+
 function Chart({coinId}:CharProps) {
     const { isLoading, data } = useQuery<IHistoricalData[]>(
         ["ohlcv", coinId], 
@@ -26,7 +37,7 @@ function Chart({coinId}:CharProps) {
         {isLoading ? (
         "Loading chart..." 
         ) : (
-            // @ts-ignore 
+            <div>
             <ApexCharts 
                 type="candlestick"
                 series={[
@@ -63,7 +74,14 @@ function Chart({coinId}:CharProps) {
                     }
                 }}
         />
-    )}
+        <ChartContainer>
+        <ToggleButtonGroup color="secondary" fullWidth={true} aria-label="Platform">
+            <ToggleButton value="line">LINE</ToggleButton>
+            <ToggleButton value="candlestick">CANDLE STICK</ToggleButton>
+        </ToggleButtonGroup>
+        </ChartContainer>
+        </div>
+        )}
     </div>
     );
 }

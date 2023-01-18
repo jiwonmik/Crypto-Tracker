@@ -1,13 +1,16 @@
+import { Helmet } from "react-helmet";
 import { Switch, Route, useLocation, useParams } from "react-router";
-import styled from "styled-components";
-import { useState, useEffect } from "react";
-import { useQuery } from "react-query";
 import { Link, useRouteMatch } from "react-router-dom";
+import { useQuery } from "react-query";
+import styled from "styled-components";
+
 import Chart from "./Chart";
 import Price from "./Price";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
-import { Helmet } from "react-helmet";
-import Coins from "./Coins";
+
+import Fab from '@mui/material/Fab';
+import HomeIcon from '@mui/icons-material/Home';
+
 
 const Container = styled.div`
     padding: 10px 20px;
@@ -182,9 +185,9 @@ function Coin() {
         </Helmet>
             <Header>
                 <BtnContainer>
-                <BackBtn>
-                    <Link to="/">Home</Link>    
-                </BackBtn>       
+                <Fab size="medium" color="secondary" aria-label="home" to="/" component={Link}>
+                    <HomeIcon/>
+                </Fab>
                 </BtnContainer>
                 <Title>
                     {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
