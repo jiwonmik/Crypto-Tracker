@@ -176,6 +176,8 @@ function Coin() {
 
     const loading = infoLoading || tickersLoading;
 
+    console.log(tickersData)
+
     return (
         <Container>
         <Helmet>
